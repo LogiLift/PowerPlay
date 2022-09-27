@@ -36,7 +36,7 @@
         import com.qualcomm.robotcore.util.Range;
 
         import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-
+        import org.firstinspires.ftc.teamcode.Robot;
         import java.util.*;
 
 
@@ -96,10 +96,7 @@ public class Drive extends LinearOpMode {
         int lastfrposition = robot.fr.getCurrentPosition();
         int lastblposition = robot.bl.getCurrentPosition();
         int lastbrposition = robot.br.getCurrentPosition();
-        int armTargetPos = 0;
 
-        robot.arm1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.armb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // run until the end of the match (driver presses STOP)
 
