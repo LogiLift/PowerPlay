@@ -59,10 +59,10 @@
 public class Robot
 {
     /* Public OpMode members. */
-    public DcMotor fl;
-    public DcMotor fr;
-    public DcMotor bl;
-    public DcMotor br;
+    public DcMotor frontLeft;
+    public DcMotor frontRight;
+    public DcMotor backLeft;
+    public DcMotor backRight;
     //public Servo testServo;
     public WebcamName eyes;
 
@@ -126,43 +126,44 @@ public class Robot
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        fl  = hwMap.get(DcMotor.class, "fl");
-        fr  = hwMap.get(DcMotor.class, "fr");
-        bl  = hwMap.get(DcMotor.class, "bl");
-        br  = hwMap.get(DcMotor.class, "br");
+        frontLeft = hwMap.get(DcMotor.class, "fl");
+        frontRight = hwMap.get(DcMotor.class, "fr");
+        backLeft = hwMap.get(DcMotor.class, "bl");
+        backRight = hwMap.get(DcMotor.class, "br");
 
 
-        fl.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        fr.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        bl.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        br.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        frontLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        frontRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        backLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
         // Set all motors to zero power
-        fl.setPower(0);
-        fr.setPower(0);
-        bl.setPower(0);
-        br.setPower(0);
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        fr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // Define and initialize ALL installed servos.
         /*testServo  = hwMap.get(Servo.class, "test");
         testServo.setPosition(MID_SERVO);*/
+        //p
     }
 
     public void mecanumDrive(double x, double y, double turn) {
-        double flpower = y + x - turn;
-        double frpower = y - x + turn;
-        double blpower = y - x - turn;
-        double brpower = y + x + turn;
+        double frontLeftPower = y + x - turn;
+        double frontRightPower = y - x + turn;
+        double backLeftPower = y - x - turn;
+        double backRightPower = y + x + turn;
 
-        fl.setPower(Range.clip(flpower, -1.0, 1.0));
-        fr.setPower(Range.clip(frpower, -1.0, 1.0));
-        bl.setPower(Range.clip(blpower, -1.0, 1.0));
-        br.setPower(Range.clip(brpower, -1.0, 1.0));
+        frontLeft.setPower(Range.clip(frontLeftPower, -1.0, 1.0));
+        frontRight.setPower(Range.clip(frontRightPower, -1.0, 1.0));
+        backLeft.setPower(Range.clip(backLeftPower, -1.0, 1.0));
+        backRight.setPower(Range.clip(backRightPower, -1.0, 1.0));
     }
     /**
      * Initialize the Vuforia localization engine.
