@@ -123,7 +123,7 @@ public class Drive extends LinearOpMode {
             // leftPower  = -gamepad1.left_stick_y ;
             // rightPower = -gamepad1.right_stick_y ;
 
-            double triggerMultiplier = 1.0 - (gamepad1.right_trigger * 0.95);
+            double triggerMultiplier = 1.0 - (gamepad1.right_trigger * 0.5);
 
             // Send calculated power to wheels
             robot.mecanumDrive(x * triggerMultiplier, y * triggerMultiplier, turn * triggerMultiplier);
