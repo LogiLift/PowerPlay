@@ -129,6 +129,16 @@ public class Drive extends LinearOpMode {
             robot.mecanumDrive(x * triggerMultiplier, y * triggerMultiplier, turn * triggerMultiplier);
 
 
+            if(gamepad1.left_bumper){
+                robot.armMotor.setPower(-1);
+            } else if(gamapad1.right_bumper){
+                robot.armMotor.setPower(1);
+            }
+
+            if(gamepad1.a){
+                robot.servoPusher.setPower(1);
+            }
+
 
 
 

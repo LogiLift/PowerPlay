@@ -64,6 +64,7 @@ public class Robot
     public DcMotor backLeft;
     public DcMotor backRight;
     //public Servo testServo;
+    public Servo servoPusher;
     public WebcamName eyes;
 
     // constants
@@ -126,28 +127,36 @@ public class Robot
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        frontLeft = hwMap.get(DcMotor.class, "fl");
-        frontRight = hwMap.get(DcMotor.class, "fr");
-        backLeft = hwMap.get(DcMotor.class, "bl");
-        backRight = hwMap.get(DcMotor.class, "br");
+        frontLeft = hwMap.get(DcMotor.class, "frontLeft");
+        frontRight = hwMap.get(DcMotor.class, "frontRight");
+        backLeft = hwMap.get(DcMotor.class, "backLeft");
+        backRight = hwMap.get(DcMotor.class, "backRight");
+        servoPusher = hwMap.get(Servo.class, "servoPusher");
+        armMotor = hwMap.get(Servo.class, "armMotor");
 
 
         frontLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         frontRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         backLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        servoPusher.setDirection(Servo.Direction.FORWARD);
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Set all motors to zero power
         frontLeft.setPower(0);
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
+        servoPusher.setPower(0);
+        armMorot.setPower(0);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // Define and initialize ALL installed servos.
         /*testServo  = hwMap.get(Servo.class, "test");
         testServo.setPosition(MID_SERVO);*/
