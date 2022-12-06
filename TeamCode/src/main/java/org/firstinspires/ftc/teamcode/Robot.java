@@ -1,45 +1,44 @@
- /* Copyright (c) 2017 FIRST. All rights reserved.
-         *
-         * Redistribution and use in source and binary forms, with or without modification,
-         * are permitted (subject to the limitations in the disclaimer below) provided that
-         * the following conditions are met:
-         *
-         * Redistributions of source code must retain the above copyright notice, this list
-         * of conditions and the following disclaimer.
-         *
-         * Redistributions in binary form must reproduce the above copyright notice, this
-         * list of conditions and the following disclaimer in the documentation and/or
-         * other materials provided with the distribution.
-         *
-         * Neither the name of FIRST nor the names of its contributors may be used to endorse or
-         * promote products derived from this software without specific prior written permission.
-         *
-         * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
-         * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-         * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-         * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-         * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-         * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-         * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-         * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-         * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-         * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-         * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-         */
+/* Copyright (c) 2017 FIRST. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted (subject to the limitations in the disclaimer below) provided that
+ * the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of FIRST nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ *
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
+ * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-        package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.DcMotorSimple;
-        import com.qualcomm.robotcore.hardware.HardwareMap;
-        import com.qualcomm.robotcore.hardware.Servo;
-        import com.qualcomm.robotcore.util.ElapsedTime;
-        import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
-        import org.firstinspires.ftc.robotcore.external.ClassFactory;
-        import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-        import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-        import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 /**
  * This is NOT an opmode.
@@ -58,17 +57,23 @@
  */
 public class Robot
 {
+
+
+    // DECLARING DCMOTORS
+
     /* Public OpMode members. */
     public DcMotor frontLeft;
     public DcMotor frontRight;
     public DcMotor backLeft;
     public DcMotor backRight;
     //public Servo testServo;
-    public Servo servoPusher;
+    public Servo thumb;
+    public DcMotor armMotor;
+    public Servo wrist;
     public WebcamName eyes;
 
-    // constants
-    public static final double MID_SERVO        =  0.5 ;
+    // CONSTANTS
+
     public static final double DRIVE_MULTIPLIER = 1.0 ;
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
@@ -101,7 +106,8 @@ public class Robot
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
-    // idk lol
+
+    // VUFORIA
     public static final String VUFORIA_KEY =
             "AYLmo+H/////AAABmTKAeUX770x1h/TWHne+dMF7gYZUCUCZKFbTtjmAE84hqdXc4Bi8byppgOtCfv88rIH98SLqNB7kQ40K2tFIZCrML9qFOfpvUx26jkoP9nkVOr7Svpx+ymeaUJ9KGUEgtF1uLz01qK51DW8J661zXnKJmnGTwEFjF+dLc5HfMMsHK48LytYtd6B0ezhc16WqoNlTLa/a59r0+jAL81xabV3vH9/Ny9R+0Hne/gcCyqLdN9JAM7QuJOAh/W9nFebTE1rXHXWs4KuMGk31ZaNHSY43SNLkj+apJEca/ae/pGVA0D4LRaRBWd3ODv9wAgARGx4KEJcJ++vLb5LcyLr2A4C2suvPbrPpC/UDN/Q+6709";
 
@@ -131,16 +137,18 @@ public class Robot
         frontRight = hwMap.get(DcMotor.class, "frontRight");
         backLeft = hwMap.get(DcMotor.class, "backLeft");
         backRight = hwMap.get(DcMotor.class, "backRight");
-        servoPusher = hwMap.get(Servo.class, "servoPusher");
-        armMotor = hwMap.get(Servo.class, "armMotor");
+        thumb = hwMap.get(Servo.class,   "thumb");
+        armMotor = hwMap.get(DcMotor.class, "armMotor");
+        wrist = hwMap.get(Servo.class, "wrist");
 
 
         frontLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         frontRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         backLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        servoPusher.setDirection(Servo.Direction.FORWARD);
+        thumb.setDirection(Servo.Direction.FORWARD);
         armMotor.setDirection(DcMotor.Direction.FORWARD);
+        wrist.setDirection(Servo.Direction.FORWARD);
 
 
         // Set all motors to zero power
@@ -148,15 +156,16 @@ public class Robot
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
-        servoPusher.setPower(0);
-        armMorot.setPower(0);
+        armMotor.setPower(0);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setTargetPosition(0);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         // Define and initialize ALL installed servos.
         /*testServo  = hwMap.get(Servo.class, "test");
         testServo.setPosition(MID_SERVO);*/
@@ -164,10 +173,10 @@ public class Robot
     }
 
     public void mecanumDrive(double x, double y, double turn) {
-        double frontLeftPower = y + x - turn;
-        double frontRightPower = y - x + turn;
-        double backLeftPower = y - x - turn;
-        double backRightPower = y + x + turn;
+        double frontLeftPower = y + x + turn;
+        double frontRightPower = y - x - turn;
+        double backLeftPower = y - x + turn;
+        double backRightPower = y + x - turn;
 
         frontLeft.setPower(Range.clip(frontLeftPower, -1.0, 1.0));
         frontRight.setPower(Range.clip(frontRightPower, -1.0, 1.0));
