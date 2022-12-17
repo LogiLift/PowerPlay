@@ -32,6 +32,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoController;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -149,7 +151,6 @@ public class Robot
         thumb.setDirection(Servo.Direction.FORWARD);
         armMotor.setDirection(DcMotor.Direction.FORWARD);
         wrist.setDirection(Servo.Direction.FORWARD);
-
 
         // Set all motors to zero power
         frontLeft.setPower(0);
